@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @idea.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @idea.description %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= image_tag(@idea.picture_url, width: 600) if @idea.picture.present? %>
+</p>
+
+<p>
+  <strong>Ratings:</strong>
+  <% @idea.ratings.each  do |rating|  %>
+  <%= rating.value  %>,
+  <% end %>
+</p>
+
+<%= form_for(@rating) do |f| %>
+<div class="field">
+  <%= f.label :value %>
+ <%= f.text_field :value  %>
+</div>
+
+<%= f.hidden_field :idea_id, value:@idea.id %>
+
+<div class="actions">
+  <%= f.submit "Save" %>
+</div>
+
+<% end %>
+
+
+<%= link_to 'Edit', edit_idea_path(@idea) %> |
+<%= link_to 'Back', ideas_path %>
